@@ -1,0 +1,4 @@
+# Comando padrão de atualização que uso:
+# git add . && git commit -a -m "Atualizado por Gabriel em $(date '+%Y-%m-%d %H:%M:%S')" && git push origin master
+
+log_*

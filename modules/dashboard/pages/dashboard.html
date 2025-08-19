@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/one_flow/">
+    <link rel="stylesheet" href="universal/css/universal.css">
+    <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
+    <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
+    <script src="commons/js/jquery-3.7.1.js"></script>
+    <title>OneFlow - Dashboard</title>
+</head>
+
+<body id="body_local">
+    <script type="module">
+        import * as gt from './universal/tag_blocks/global_tags.js';
+        import * as js from './modules/dashboard/js/dashboard.js';
+        import * as conn from './commons/js/conn_db.js';
+        import {loadMyHTMLInSelector} from './commons/js/loadMyHTMLInSelector.js';
+
+        // MENU SIDE BAR
+        gt.menu_sidebar('dinamics1', {sidebar_content: [
+                // logo
+                gt.image_center({ is_circle: 'true', image_size_desktop: '8vw', on_click: () => window.location.href = "./modules/dashboard/pages/dashboard.html"}),
+                // 1ª linha
+                gt.line_separator({ width: '95%', margin: '15px auto', height: '1.5px', class_name: ''}),
+                // contratos
+                gt.option_btn_img({option_btn_img_icon: './universal/images/contratos_icon.png', option_btn_img_text: 'Contratos', option_btn_img_onclick: () => loadMyHTMLInSelector('./modules/dashboard/pages/dash_contratos.html', '#div_2'), option_btn_img_icon_size: '10%'}),
+                // financeiro
+                gt.option_btn_img({option_btn_img_icon: './universal/images/financeiro_icon.png', option_btn_img_text: 'Financeiro', option_btn_img_onclick: () => alert('Clicou no Financeiro!'), option_btn_img_icon_size: '10%'}),
+                // mesa operacional
+                gt.option_btn_img({option_btn_img_icon: './universal/images/mesa_operacional_icon.png', option_btn_img_text: 'Mesa Operacional', option_btn_img_onclick: () => alert('Clicou na mesa!'), option_btn_img_icon_size: '10%', option_btn_img_icon_size_mobile: '2vh'}),
+                // RH
+                gt.option_btn_img({option_btn_img_icon: './universal/images/rh_icon.png', option_btn_img_text: 'RH', option_btn_img_onclick: () => alert('Clicou no RH!'), option_btn_img_icon_size_mobile: '2vh', option_btn_img_icon_size: '10%'}),
+                // 2ª linha
+                gt.line_separator({ width: '95%', margin: '15px auto', height: '1.5px', class_name: ''}),
+                // sair
+                gt.option_btn_img({option_btn_img_icon: './universal/images/sair.png', option_btn_img_text: 'Sair', option_btn_img_bottom: true, option_btn_img_onclick: () => window.location.href = './modules/login/pages/login.html', option_btn_img_icon_size: '10%'})
+            ]
+        })
+
+        gt.header('dinamics2', {
+            header_fixed: true,
+            height: 'auto',
+            padding: '10px',
+            style: "border-bottom: .5px solid #ccc; padding: 1vh; background: white",
+            bg_dark: "#181818",
+            header_content: [
+                // link "gostaria de saber mais?"
+                gt.anchor({text: "Gostaria de saber mais?", color: "#0f94e1", on_click: () => js.iWantKnowMore(gt), style: "width: 35%; justify-content: flex-start"}),
+                // espaçador
+                gt.spacer(),
+                // usuário / seção de usuário
+                gt.user_top_page({ user_photo: false, user_name: 'João da Silva', user_profession: 'Desenvolvedor', user_pending_count: 3, user_status_text: 'Online', user_status_color: '#2ecc40', width: '20vw', on_click: () => alert('Clicou no topo do usuário!')}),
+            ],
+        });
+        
+        //DIV CENTRAL
+        gt.div('dinamics2', {id: "div_2", style: "width: 100%; display: flex; flex-wrap: wrap"});
+        
+        // PAINEL DE CONTRATOS
+        gt.div('div_2', {id: "div_3", style: "width: 100%; display: flex; min-heigth: 80vh; flex-direction: column;", content: [
+            //O que você deseja fazer?
+            gt.div('div_3', {id: "div_4", style: "width: 100%; height: 80px;", content: [
+                gt.input_text({label: '', name: 'input_search', placeholder: 'O que deseja fazer?', value: '', required: false, input_id: '', on_function: null, on_click: null, style: 'margin: 2px 10px; padding: 0;', width_desktop: '40%', width_mobile: '', height_desktop: '100%', height_mobile: '', bg_light: 'transparent', bg_dark: 'transparent', color_light: '', color_dark: ''}),
+            ]}),
+            gt.div('div_3', {id: "div_5", style: "width: 100%; display: flex; flex-wrap: wrap; gap: 15px; padding: 10px;", content: [
+                gt.div('div_5', {id: "div_6", bg_dark: "#191919", style: "display: flex; align-items: center; justify-content: center; flex-direction: column; width: 15vw; height: 15vw; border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,.5)", on_click: () => window.location.href = "#", content: [
+                    gt.image_center({bg_dark: '', bg_light: '', image_size_desktop: '8vw'}),
+                    gt.text({text_content: "Checklist Contratos"}),
+                ]}),
+            ]}),
+        ]});
+        
+        
+        // conn.SELECT_ALL_FROM_WHERE('div_3', 'div_3_new', gt, js.inputSearch, js.showCardOfAll, {
+        //     db: 'aplicacao_db', 
+        //     table: 'SRA', 
+        //     order_by: 'Nome',
+        //     column1: 'Nome',
+        //     column2: 'Filial',
+        //     value2: '101',
+        //     columns: ["Nome"]}
+        // );
+        
+    </script>
+</body>
+<script type="module" src="modules/dashboard/js/dashboard.js"></script>
+</html>

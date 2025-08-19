@@ -1,0 +1,23 @@
+[
+  {"name": "CTH", "primary_key": "", "columns": [""]},
+  {"name": "CTT", "primary_key": ["C Custo", "Desc Moeda 1"], "columns": [""]},
+  {"name": "RH3", "primary_key": "Código", "columns": [""]},
+  {"name": "RH4", "primary_key": "", "columns": [""]},
+  {"name": "SP0", "primary_key": "", "columns": [""]},
+  {"name": "SP2", "primary_key": "", "columns": [""]},
+  {"name": "SP6", "primary_key": "", "columns": [""]},
+  {"name": "SP8", "primary_key": "", "columns": [""]},
+  {"name": "SP9", "primary_key": "", "columns": [""]},
+  {"name": "SPC", "primary_key": "", "columns": [""]},
+  {"name": "SPG", "primary_key": "", "columns": [""]},
+  {"name": "SPH", "primary_key": "", "columns": [""]},
+  {"name": "SPI", "primary_key": "", "columns": [""]},
+  {"name": "SR6", "primary_key": "", "columns": [""]},
+  {"name": "SR8", "primary_key": "", "columns": [""]},
+  {"name": "SRA", "primary_key": "Matricula", "columns": [""]},
+  {"name": "SRE", "primary_key": "", "columns": [""]},
+  {"name": "SRF", "primary_key": "", "columns": [""]},
+  {"name": "SRJ", "primary_key": "", "columns": [""]},
+  {"name": "SRV", "primary_key": "", "columns": [""]},
+  {"name": "TNF", "primary_key": "", "columns": [""]}
+]

@@ -1,0 +1,46 @@
+#body_local {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+    #body_local {
+      background-color: #202020;
+      color: #ffffff;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #body_local {
+      background-color: #fff;
+      color: #000000;
+    }
+}
+
+#dinamics2 {
+  margin-left: 18vw;
+  width: 82vw;
+}
+
+@media (prefers-color-scheme: dark) {
+  #dinamics2 {
+    background-color: #202020;
+    color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  #dinamics2 {
+    background-color: #fff;
+    color: #000000;
+  }
+}
+
+@media (max-width: 1000px) {
+  #dinamics2 {
+    margin-left: 0;
+    width: 100%;
+  }
+}
