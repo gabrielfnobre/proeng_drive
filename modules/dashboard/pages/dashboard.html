@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/one_flow/">
+    <base href="/proeng_drive/">
     <link rel="stylesheet" href="universal/css/universal.css">
     <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
     <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
     <script src="commons/js/jquery-3.7.1.js"></script>
-    <title>OneFlow - Dashboard</title>
+    <title>Proeng Driver - Dashboard</title>
 </head>
 
 <body id="body_local">
@@ -19,70 +19,202 @@
         import * as conn from './commons/js/conn_db.js';
         import {loadMyHTMLInSelector} from './commons/js/loadMyHTMLInSelector.js';
 
-        // MENU SIDE BAR
-        gt.menu_sidebar('dinamics1', {sidebar_content: [
-                // logo
-                gt.image_center({ is_circle: 'true', image_size_desktop: '8vw', on_click: () => window.location.href = "./modules/dashboard/pages/dashboard.html"}),
-                // 1ª linha
-                gt.line_separator({ width: '95%', margin: '15px auto', height: '1.5px', class_name: ''}),
-                // contratos
-                gt.option_btn_img({option_btn_img_icon: './universal/images/contratos_icon.png', option_btn_img_text: 'Contratos', option_btn_img_onclick: () => loadMyHTMLInSelector('./modules/dashboard/pages/dash_contratos.html', '#div_2'), option_btn_img_icon_size: '10%'}),
-                // financeiro
-                gt.option_btn_img({option_btn_img_icon: './universal/images/financeiro_icon.png', option_btn_img_text: 'Financeiro', option_btn_img_onclick: () => alert('Clicou no Financeiro!'), option_btn_img_icon_size: '10%'}),
-                // mesa operacional
-                gt.option_btn_img({option_btn_img_icon: './universal/images/mesa_operacional_icon.png', option_btn_img_text: 'Mesa Operacional', option_btn_img_onclick: () => alert('Clicou na mesa!'), option_btn_img_icon_size: '10%', option_btn_img_icon_size_mobile: '2vh'}),
-                // RH
-                gt.option_btn_img({option_btn_img_icon: './universal/images/rh_icon.png', option_btn_img_text: 'RH', option_btn_img_onclick: () => alert('Clicou no RH!'), option_btn_img_icon_size_mobile: '2vh', option_btn_img_icon_size: '10%'}),
-                // 2ª linha
-                gt.line_separator({ width: '95%', margin: '15px auto', height: '1.5px', class_name: ''}),
-                // sair
-                gt.option_btn_img({option_btn_img_icon: './universal/images/sair.png', option_btn_img_text: 'Sair', option_btn_img_bottom: true, option_btn_img_onclick: () => window.location.href = './modules/login/pages/login.html', option_btn_img_icon_size: '10%'})
-            ]
-        })
-
-        gt.header('dinamics2', {
+        // CABEÇALHO
+        gt.header('dinamics', {
+            bg_dark: "#181818",
             header_fixed: true,
-            height: 'auto',
+            header_content: [
+                // LOGO
+                gt.image_center({
+                    image_size_desktop: '11vh',
+                    image_size_mobile: '9vh',
+                    on_click: () => window.location.href = "./modules/login/pages/login.html",
+                    style: "margin-left: 10px",
+                    width_desktop: '20%',
+                    width_mobile: '30%',
+                }),
+                
+                // ESPAÇADOR
+                gt.spacer(),
+
+                // USUÁRIO
+                gt.user_top_page({ user_photo: false, user_name: 'João da Silva', user_profession: 'Desenvolvedor', user_pending_count: 3, user_status_text: 'Online', user_status_color: '#2ecc40', on_click: () => alert('Clicou no topo do usuário!'), width_mobile: '50%'}),
+            ],
+            height_desktop: "12vh",
+            height_mobile: "10vh",
             padding: '10px',
             style: "border-bottom: .5px solid #ccc; padding: 1vh; background: white",
-            bg_dark: "#181818",
-            header_content: [
-                // link "gostaria de saber mais?"
-                gt.anchor({text: "Gostaria de saber mais?", color: "#0f94e1", on_click: () => js.iWantKnowMore(gt), style: "width: 35%; justify-content: flex-start"}),
-                // espaçador
-                gt.spacer(),
-                // usuário / seção de usuário
-                gt.user_top_page({ user_photo: false, user_name: 'João da Silva', user_profession: 'Desenvolvedor', user_pending_count: 3, user_status_text: 'Online', user_status_color: '#2ecc40', width: '20vw', on_click: () => alert('Clicou no topo do usuário!')}),
-            ],
         });
+
+        // CONTAINER PRINCIPAL
+        gt.div('body_local', {
+            id: 'cnt_principal',
+            content: [
+                
+                //CARD OVERVIEW
+                gt.div('body_local', {
+                    id: 'overview',
+                    content: [
+
+                        // CARROS DISPONÍVEIS
+                        gt.div('overview', {
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/green_car.png'}),
+                                gt.text({color: "#00ff00", text_content: "4<br>Disponível", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'car',
+                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_avaliable.html",
+                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // CARROS USANDO
+                        gt.div('overview', {
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/blue_car.png'}),
+                                gt.text({color: "#00ccff", text_content: "4<br>Usando", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'car',
+                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_using.html",
+                            style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // CARROS MANUTENÇÃO
+                        gt.div('overview', {
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/red_car.png'}),
+                                gt.text({color: "#ff0000", text_content: "4<br>Manutenção", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'car',
+                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_maintenance.html",
+                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // CARROS BLOQUEADOS
+                        gt.div('overview', {
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/black_car.png', is_dark: true}),
+                                gt.text({text_content: "1<br>Bloqueado", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'car',
+                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_avaliable.html",
+                            style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // CARROS RESERVADOS
+                        // gt.div('overview', {
+                        //     content: [
+                        //         gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/orange_car.png'}),
+                        //         gt.text({color: "#ff7f2a", text_content: "1<br>Reservado", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                        //     ],
+                        //     height_desktop: '12vw',
+                        //     height_mobile: '40vw',
+                        //     id: 'car',
+                        //     style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                        //     width_desktop: '12vw',
+                        //     width_mobile: '40vw',
+                        // }),
         
-        //DIV CENTRAL
-        gt.div('dinamics2', {id: "div_2", style: "width: 100%; display: flex; flex-wrap: wrap"});
-        
-        // PAINEL DE CONTRATOS
-        gt.div('div_2', {id: "div_3", style: "width: 100%; display: flex; min-heigth: 80vh; flex-direction: column;", content: [
-            //O que você deseja fazer?
-            gt.div('div_3', {id: "div_4", style: "width: 100%; height: 80px;", content: [
-                gt.input_text({label: '', name: 'input_search', placeholder: 'O que deseja fazer?', value: '', required: false, input_id: '', on_function: null, on_click: null, style: 'margin: 2px 10px; padding: 0;', width_desktop: '40%', width_mobile: '', height_desktop: '100%', height_mobile: '', bg_light: 'transparent', bg_dark: 'transparent', color_light: '', color_dark: ''}),
-            ]}),
-            gt.div('div_3', {id: "div_5", style: "width: 100%; display: flex; flex-wrap: wrap; gap: 15px; padding: 10px;", content: [
-                gt.div('div_5', {id: "div_6", bg_dark: "#191919", style: "display: flex; align-items: center; justify-content: center; flex-direction: column; width: 15vw; height: 15vw; border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,.5)", on_click: () => window.location.href = "#", content: [
-                    gt.image_center({bg_dark: '', bg_light: '', image_size_desktop: '8vw'}),
-                    gt.text({text_content: "Checklist Contratos"}),
-                ]}),
-            ]}),
-        ]});
-        
-        
-        // conn.SELECT_ALL_FROM_WHERE('div_3', 'div_3_new', gt, js.inputSearch, js.showCardOfAll, {
-        //     db: 'aplicacao_db', 
-        //     table: 'SRA', 
-        //     order_by: 'Nome',
-        //     column1: 'Nome',
-        //     column2: 'Filial',
-        //     value2: '101',
-        //     columns: ["Nome"]}
-        // );
+                    ],
+                    style: "justify-content: center; border-radius: 1vh; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 20px; padding: 10px;",
+                    width_desktop: '60%',
+                    width_mobile: '100%',
+                }),
+                
+                //CARDS UTILITARIOS
+                gt.div('body_local', {
+                    id: 'utilities',
+                    content: [
+                        // DESTINOS HOJE
+                        gt.div('overview', {
+                            bg_light: 'linear-gradient(120deg, #6b110b, #ff0057)',
+                            bg_dark: 'linear-gradient(120deg, #6b110b, #ff0057)',
+                            content: [
+                                gt.text({color: "white", text_content: "DESTINOS HOJE", style: "font-size: 2.3vh; font-weight: bold;"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'i_want_to_use',
+                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // VEICULOS
+                        gt.div('overview', {
+                            bg_light: 'linear-gradient(120deg, #ff3d00, #fde402)',
+                            bg_dark: 'linear-gradient(120deg, #ff3d00, #fde402)',
+                            content: [
+                                gt.text({color: "white", text_content: "VEÍCULOS", style: "font-size: 2.3vh; font-weight: bold;"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'i_want_to_use',
+                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // DEVOLVER O CARRO
+                        gt.div('overview', {
+                            bg_light: 'linear-gradient(120deg, blue, #00f9ee)',
+                            bg_dark: 'linear-gradient(120deg, blue, #00f9ee)',
+                            content: [
+                                gt.text({color: "white", text_content: "QUERO DEVOLVER", style: "font-size: 2.3vh; font-weight: bold;"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'i_want_to_use',
+                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+
+                        // QUERO USAR
+                        gt.div('overview', {
+                            bg_light: 'linear-gradient(120deg, green, #a7f900)',
+                            bg_dark: 'linear-gradient(120deg, green, #a7f900)',
+                            content: [
+                                gt.text({color: "white", text_content: "QUERO USAR", style: "font-size: 2.3vh; font-weight: bold;"}),
+                            ],
+                            height_desktop: '12vw',
+                            height_mobile: '40vw',
+                            id: 'i_want_to_use',
+                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_avaliable.html",
+                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '12vw',
+                            width_mobile: '40vw',
+                        }),
+                    ],
+                    style: "justify-content: center; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding: 10px;",
+                    width_desktop: '60%',
+                    width_mobile: '100%',
+                }),
+
+            ],
+            height_desktop: '100vh',
+            height_mobile: '100vh',
+            style: "align-items: center;display: flex; flex-direction: column; padding: 20px;",
+            width_desktop: '100%',
+            width_mobile: '100%',
+        })
+
+
         
     </script>
 </body>

@@ -4,6 +4,7 @@
  * @param {object} options - parâmetros da imagem e CSS:
  *      - image_path: string - caminho da imagem (default: 'universal/images/logo_one_flow_com_proeng.png')
  *      - is_circle: bool - true para border-radius 50%, false para normal (default: false)
+ *      - is_dark: bool - se true, aplica filter: invert(1) na imagem apenas no modo dark (default: false)
  *      - image_size_desktop: string - ex: '15vw', '120px' (opcional, default: '15vw')
  *      - image_size_mobile: string - ex: '50vw', '80px' (opcional, default: '50vw')
  *      - width_desktop: string - largura do componente no desktop (ex: '15vw', '120px', etc)
@@ -20,12 +21,13 @@
  * 
  * @returns {jQuery} - elemento jQuery pronto para ser inserido em outro container
  * @copia_rapida_de_parametros
-    {image_path: 'universal/images/logo_one_flow_comum.png', is_circle: '', image_size_desktop: '15vw', image_size_mobile: '50vw', width_desktop: '15vw', width_mobile: '50vw', height_desktop: '15vw', height_mobile: '50vw', on_click: 'https//jw.org ou () => function()', style: 'border: 2px solid red;'}
+    {image_path: 'universal/images/logo_one_flow_comum.png', is_circle: '', is_dark: false, image_size_desktop: '15vw', image_size_mobile: '50vw', width_desktop: '15vw', width_mobile: '50vw', height_desktop: '15vw', height_mobile: '50vw', on_click: 'https//jw.org ou () => function()', style: 'border: 2px solid red;'}
  */
 export default function image_center(options = {}) {
     // Parâmetros principais
     const image_path = options.image_path !== undefined ? options.image_path : 'universal/images/logo_one_flow_com_proeng.png';
     const is_circle = options.is_circle !== undefined ? options.is_circle : false;
+    const is_dark = options.is_dark !== undefined ? options.is_dark : false;
     const image_size_desktop = options.image_size_desktop !== undefined && options.image_size_desktop !== null ? options.image_size_desktop : '15vw';
     const image_size_mobile = options.image_size_mobile !== undefined && options.image_size_mobile !== null ? options.image_size_mobile : '50vw';
     const width_desktop = options.width_desktop;
@@ -50,6 +52,7 @@ export default function image_center(options = {}) {
         if (
             key !== 'image_path' &&
             key !== 'is_circle' &&
+            key !== 'is_dark' &&
             key !== 'image_size_desktop' &&
             key !== 'image_size_mobile' &&
             key !== 'width_desktop' &&
@@ -97,44 +100,46 @@ export default function image_center(options = {}) {
 
     // Monta CSS exclusivo para esta instância
     let customResponsiveCSS = '';
+
+    // --- Container (componente) largura/altura ---
     // Desktop
     if (width_desktop || height_desktop) {
         customResponsiveCSS += `
-            .${imageClass} {
+            .${containerClass} {
                 ${width_desktop ? `width: ${width_desktop} !important;` : ''}
                 ${height_desktop ? `height: ${height_desktop} !important;` : ''}
             }
         `;
-    } else {
-        // Se não passar width_desktop/height_desktop, usa image_size_desktop
-        customResponsiveCSS += `
-            .${imageClass} {
-                width: ${image_size_desktop};
-                height: ${image_size_desktop};
-            }
-        `;
     }
-    // Mobile (a partir de 1000px)
+    // Mobile
     if (width_mobile || height_mobile) {
         customResponsiveCSS += `
             @media (max-width: 1000px) {
-                .${imageClass} {
+                .${containerClass} {
                     ${width_mobile ? `width: ${width_mobile} !important;` : ''}
                     ${height_mobile ? `height: ${height_mobile} !important;` : ''}
                 }
             }
         `;
-    } else {
-        // Se não passar width_mobile/height_mobile, usa image_size_mobile
-        customResponsiveCSS += `
-            @media (max-width: 1000px) {
-                .${imageClass} {
-                    width: ${image_size_mobile} !important;
-                    height: ${image_size_mobile} !important;
-                }
-            }
-        `;
     }
+
+    // --- Imagem (tamanho da imagem) ---
+    // Desktop
+    customResponsiveCSS += `
+        .${imageClass} {
+            width: ${image_size_desktop};
+            height: ${image_size_desktop};
+        }
+    `;
+    // Mobile
+    customResponsiveCSS += `
+        @media (max-width: 1000px) {
+            .${imageClass} {
+                width: ${image_size_mobile} !important;
+                height: ${image_size_mobile} !important;
+            }
+        }
+    `;
 
     // CSS para modo light/dark
     let customModeCSS = '';
@@ -167,6 +172,18 @@ export default function image_center(options = {}) {
         `;
     }
 
+    // CSS para filter invert se is_dark for true
+    let customDarkImageCSS = '';
+    if (is_dark) {
+        customDarkImageCSS += `
+            @media (prefers-color-scheme: dark) {
+                .${imageClass} {
+                    filter: invert(1) !important;
+                }
+            }
+        `;
+    }
+
     // Garante que o CSS é exclusivo para esta instância
     const styleTag = `
         <style id="style-${uniqueId}">
@@ -180,7 +197,7 @@ export default function image_center(options = {}) {
         .${imageClass} {
             background-position: center;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
             display: block;
             margin: 0;
             transition: border-radius 0.2s, transform 0.18s cubic-bezier(.4,1.3,.5,1.01);
@@ -192,6 +209,7 @@ export default function image_center(options = {}) {
         }
         ${customResponsiveCSS}
         ${customModeCSS}
+        ${customDarkImageCSS}
         </style>
     `;
     $('head').append(styleTag);
@@ -258,6 +276,7 @@ import imageCenter from './image_center.js';
 const $img = imageCenter({
     image_path: '/caminho/da/imagem.jpg',
     is_circle: true,
+    is_dark: true,
     image_size_desktop: '12vw',
     image_size_mobile: '40vw',
     width_desktop: '12vw',
@@ -276,6 +295,7 @@ const $img = imageCenter({
 const $img2 = imageCenter({
     image_path: '/caminho/da/imagem2.jpg',
     is_circle: false,
+    is_dark: false,
     on_click: "console.log('Imagem clicada via string!')",
     style: 'border-radius: 10px;',
     width_desktop: '120px',
@@ -284,6 +304,7 @@ const $img2 = imageCenter({
 // ou
 const $img3 = imageCenter({
     image_path: '/caminho/da/imagem3.jpg',
+    is_dark: true,
     on_click: "https://www.google.com"
 });
 

@@ -1,6 +1,7 @@
 #body_local {
-    display: flex;
     align-items: flex-start;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     width: 100%;
 }
@@ -19,28 +20,20 @@
     }
 }
 
-#dinamics2 {
-  margin-left: 18vw;
-  width: 82vw;
+#dinamics {
+  width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
-  #dinamics2 {
+  #dinamics {
     background-color: #202020;
     color: #ffffff;
   }
 }
 
 @media (prefers-color-scheme: light) {
-  #dinamics2 {
+  #dinamics {
     background-color: #fff;
     color: #000000;
-  }
-}
-
-@media (max-width: 1000px) {
-  #dinamics2 {
-    margin-left: 0;
-    width: 100%;
   }
 }

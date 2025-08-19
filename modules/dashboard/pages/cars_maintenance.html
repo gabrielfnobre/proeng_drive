@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/proeng_drive/">
+    <link rel="stylesheet" href="universal/css/universal.css">
+    <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
+    <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
+    <script src="commons/js/jquery-3.7.1.js"></script>
+    <title>Proeng Driver - Status</title>
+</head>
+
+<body id="body_local">
+    <script type="module">
+        import * as gt from './universal/tag_blocks/global_tags.js';
+        import * as js from './modules/dashboard/js/dashboard.js';
+        import * as conn from './commons/js/conn_db.js';
+        import {loadMyHTMLInSelector} from './commons/js/loadMyHTMLInSelector.js';
+
+        // CABEÇALHO
+        gt.header('dinamics', {
+            bg_dark: "#181818",
+            header_fixed: true,
+            header_content: [
+                // LOGO
+                gt.image_center({
+                    image_size_desktop: '11vh',
+                    image_size_mobile: '9vh',
+                    on_click: () => window.location.href = "./modules/dashboard/pages/dashboard.html",
+                    style: "margin-left: 10px",
+                    width_desktop: '20%',
+                    width_mobile: '30%',
+                }),
+                
+                // ESPAÇADOR
+                gt.spacer(),
+
+                // USUÁRIO
+                gt.user_top_page({ user_photo: false, user_name: 'João da Silva', user_profession: 'Desenvolvedor', user_pending_count: 3, user_status_text: 'Online', user_status_color: '#2ecc40', on_click: () => alert('Clicou no topo do usuário!'), width_mobile: '50%'}),
+            ],
+            height_desktop: "12vh",
+            height_mobile: "10vh",
+            padding: '10px',
+            style: "border-bottom: .5px solid #ccc; padding: 1vh; background: white",
+        });
+
+        // CONTAINER PRINCIPAL
+        gt.div('body_local', {
+            id: 'cnt_principal',
+            content: [
+                
+                // TITULO
+                gt.text({color: "#ff0000", text_content: "EM MANUTENÇÃO", style: "font-size: 4vh; font-weight: bold; text-shadow: 2px 2px 3px rgba(0,0,0,.5)"}),
+
+                //CARD OVERVIEW
+                gt.div('body_local', {
+                    id: 'overview',
+                    content: [
+
+                        // CARD DE CARRO
+                        gt.div('overview', {
+                            bg_dark: "#2a2a2a",
+                            content: [
+
+                                //CONTAINER HORIZONTAL - CARRO
+                                gt.div('car_details', {
+                                    content: [
+
+                                        //CONTAINER VERTICAL - IMAGEM DO CARRO
+                                        gt.div('car_details', {
+                                            content: [
+                                                gt.image_center({bg_dark: 'transparent', is_circle: true, image_size_desktop: '10vw', image_size_mobile: '25vw', image_path: './universal/images/nissan_kicks.jpg', style: "background-color: white; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '25vw'}),
+                                            ],
+                                            style: "display: flex; flex-direction: column; padding: 10px;",
+                                            width_desktop: '30%',
+                                            width_mobile: '30%',
+                                        }),
+
+                                        //CONTAINER VERTICAL - DESCRIÇÕES DO CARRO
+                                        gt.div('car_details', {
+                                            content: [
+                                                gt.text({text_content: "Nissan Kicks", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
+                                                gt.text({text_content: "<b>Placa:</b> XLS-4578", style: "text-align: left; margin: 0"}),
+                                                gt.text({text_content: "<b>Ano:</b> 2024", style: "text-align: left; margin: 0"}),
+                                            ],
+                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
+                                            width_desktop: '70%',
+                                            width_mobile: '70%',
+                                        }),
+                                    ],
+                                    style: "display: flex;",
+                                    width_desktop: '100%',
+                                    width_mobile: '100%',
+                                }),
+
+                                //CONTAINER HORIZONTAL - USUARIO
+                                gt.div('car_details', {
+                                    content: [
+
+                                        //CONTAINER VERTICAL - IMAGEM DO USUARIO
+                                        gt.div('car_details', {
+                                            content: [
+                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '15vw', image_path: './universal/images/avatar_3.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
+                                            ],
+                                            style: "display: flex; flex-direction: column; padding: 10px;",
+                                            width_desktop: '30%',
+                                            width_mobile: '30%',
+                                        }),
+
+                                        //CONTAINER VERTICAL - DESCRIÇÕES DO USUARIO
+                                        gt.div('car_details', {
+                                            content: [
+                                                gt.text({text_content: "Quem levou?", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
+                                                gt.text({text_content: "<b>Nome:</b> Nome tal", style: "text-align: left; margin: 0"}),
+                                                gt.text({text_content: "<b>Setor:</b> Inovação", style: "text-align: left; margin: 0"}),
+                                                gt.text({text_content: "<b>Quando levou?: </b> 17/08/2025", style: "text-align: left; margin: 0"}),
+                                            ],
+                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
+                                            width_desktop: '70%',
+                                            width_mobile: '70%',
+                                        }),
+                                    ],
+                                    style: "display: flex;",
+                                    width_desktop: '100%',
+                                    width_mobile: '100%',
+                                }),
+
+                                //CONTAINER HORIZONTAL - LOCALIZAÇÃO
+                                gt.div('car_details', {
+                                    content: [
+
+                                        //CONTAINER VERTICAL - IMAGEM DA LOCALIZAÇÃO
+                                        gt.div('car_details', {
+                                            content: [
+                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '8vw', image_size_mobile: '15vw', image_path: './universal/images/location.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
+                                            ],
+                                            style: "display: flex; flex-direction: column; padding: 10px;",
+                                            width_desktop: '30%',
+                                            width_mobile: '30%',
+                                        }),
+
+                                        //CONTAINER VERTICAL - DESCRIÇÕES DA LOCALIZAÇÃO
+                                        gt.div('car_details', {
+                                            content: [
+                                                gt.text({text_content: "Onde está?", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
+                                                gt.text({text_content: "Oficina do Seu João", style: "text-align: left; margin: 0"}),
+                                            ],
+                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
+                                            width_desktop: '70%',
+                                            width_mobile: '70%',
+                                        }),
+                                    ],
+                                    style: "display: flex;",
+                                    width_desktop: '100%',
+                                    width_mobile: '100%',
+                                }),
+                            ],
+                            id: 'cars_details',
+                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-direction: column; padding: 10px;",
+                            width_desktop: '100%',
+                            width_mobile: '100%',
+                        }),
+                    ],
+                    style: "justify-content: center; display: flex; flex-direction: column; gap: 15px; padding: 10px;",
+                    width_desktop: '60%',
+                    width_mobile: '100%',
+                }),
+                
+
+            ],
+            height_desktop: '100vh',
+            height_mobile: '100vh',
+            style: "align-items: center;display: flex; flex-direction: column; padding: 20px;",
+            width_desktop: '100%',
+            width_mobile: '100%',
+        })
+
+
+        
+    </script>
+</body>
+<script type="module" src="modules/dashboard/js/dashboard.js"></script>
+</html>
