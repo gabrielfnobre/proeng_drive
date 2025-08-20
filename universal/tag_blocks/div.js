@@ -12,6 +12,12 @@
  *      - width_mobile: string (opcional) - largura da div no mobile (ex: '90%', '100vw', etc)
  *      - height_desktop: string (opcional) - altura da div no desktop (ex: '40px', 'auto', etc)
  *      - height_mobile: string (opcional) - altura da div no mobile (ex: '60px', 'auto', etc)
+ *      - flex_desktop: string (opcional) - 'row' ou 'column' para flex-direction no desktop (default: 'column')
+ *      - flex_mobile: string (opcional) - 'row' ou 'column' para flex-direction no mobile (default: 'column')
+ *      - align_desktop: string (opcional) - valor de align-items no desktop
+ *      - align_mobile: string (opcional) - valor de align-items no mobile
+ *      - justify_desktop: string (opcional) - valor de justify-content no desktop
+ *      - justify_mobile: string (opcional) - valor de justify-content no mobile
  *      - bg_light: string (opcional) - cor de fundo para modo light
  *      - bg_dark: string (opcional) - cor de fundo para modo dark
  *      - color_light: string (opcional) - cor do texto para modo light
@@ -30,6 +36,12 @@ export default function neutral_div(cnt_created = null, options = {}) {
         width_mobile,
         height_desktop,
         height_mobile,
+        flex_desktop = 'column',
+        flex_mobile = 'column',
+        align_desktop,
+        align_mobile,
+        justify_desktop,
+        justify_mobile,
         bg_light,
         bg_dark,
         color_light,
@@ -61,6 +73,12 @@ export default function neutral_div(cnt_created = null, options = {}) {
             key !== 'width_mobile' &&
             key !== 'height_desktop' &&
             key !== 'height_mobile' &&
+            key !== 'flex_desktop' &&
+            key !== 'flex_mobile' &&
+            key !== 'align_desktop' &&
+            key !== 'align_mobile' &&
+            key !== 'justify_desktop' &&
+            key !== 'justify_mobile' &&
             key !== 'bg_light' &&
             key !== 'bg_dark' &&
             key !== 'color_light' &&
@@ -70,22 +88,39 @@ export default function neutral_div(cnt_created = null, options = {}) {
         }
     }
 
-    // Monta CSS customizado para width/height responsivos e tema, exclusivo para esta instância
+    // Monta CSS customizado para width/height responsivos, flex, alinhamentos e tema, exclusivo para esta instância
     let customCSS = '';
+
+    // Função para verificar se o style inline sobrescreve display
+    function styleHasDisplay(styleStr) {
+        if (!styleStr) return false;
+        return /(^|;)\s*display\s*:/i.test(styleStr);
+    }
+    const hasDisplayInline = styleHasDisplay(style);
+
     // Desktop (default)
-    if (width_desktop || height_desktop) {
-        customCSS += `.${uniqueClass} {`;
-        if (width_desktop) customCSS += `width: ${width_desktop} !important;`;
-        if (height_desktop) customCSS += `height: ${height_desktop} !important;`;
-        customCSS += `}\n`;
+    customCSS += `.${uniqueClass} {`;
+    // display/flex-direction/align/justify só se NÃO houver display no style inline
+    if (!hasDisplayInline) {
+        customCSS += `display: flex !important;`;
+        customCSS += `flex-direction: ${flex_desktop || 'column'} !important;`;
+        if (align_desktop) customCSS += `align-items: ${align_desktop} !important;`;
+        if (justify_desktop) customCSS += `justify-content: ${justify_desktop} !important;`;
     }
+    if (width_desktop) customCSS += `width: ${width_desktop} !important;`;
+    if (height_desktop) customCSS += `height: ${height_desktop} !important;`;
+    customCSS += `}\n`;
+
     // Mobile (max-width: 1000px)
-    if (width_mobile || height_mobile) {
-        customCSS += `@media (max-width: 1000px) { .${uniqueClass} {`;
-        if (width_mobile) customCSS += `width: ${width_mobile} !important;`;
-        if (height_mobile) customCSS += `height: ${height_mobile} !important;`;
-        customCSS += `} }\n`;
+    customCSS += `@media (max-width: 1000px) { .${uniqueClass} {`;
+    if (!hasDisplayInline) {
+        customCSS += `flex-direction: ${flex_mobile || 'column'} !important;`;
+        if (align_mobile) customCSS += `align-items: ${align_mobile} !important;`;
+        if (justify_mobile) customCSS += `justify-content: ${justify_mobile} !important;`;
     }
+    if (width_mobile) customCSS += `width: ${width_mobile} !important;`;
+    if (height_mobile) customCSS += `height: ${height_mobile} !important;`;
+    customCSS += `} }\n`;
 
     // Tema: bg_light, bg_dark, color_light, color_dark
     // Defaults

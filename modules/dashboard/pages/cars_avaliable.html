@@ -15,36 +15,13 @@
 <body id="body_local">
     <script type="module">
         import * as gt from './universal/tag_blocks/global_tags.js';
+        import * as ct from './modules/commons_tags/commons.js';
         import * as js from './modules/dashboard/js/dashboard.js';
         import * as conn from './commons/js/conn_db.js';
         import {loadMyHTMLInSelector} from './commons/js/loadMyHTMLInSelector.js';
 
         // CABEÇALHO
-        gt.header('dinamics', {
-            bg_dark: "#181818",
-            header_fixed: true,
-            header_content: [
-                // LOGO
-                gt.image_center({
-                    image_size_desktop: '11vh',
-                    image_size_mobile: '9vh',
-                    on_click: () => window.location.href = "./modules/dashboard/pages/dashboard.html",
-                    style: "margin-left: 10px",
-                    width_desktop: '20%',
-                    width_mobile: '30%',
-                }),
-                
-                // ESPAÇADOR
-                gt.spacer(),
-
-                // USUÁRIO
-                gt.user_top_page({ user_photo: false, user_name: 'João da Silva', user_profession: 'Desenvolvedor', user_pending_count: 3, user_status_text: 'Online', user_status_color: '#2ecc40', on_click: () => alert('Clicou no topo do usuário!'), width_mobile: '50%'}),
-            ],
-            height_desktop: "12vh",
-            height_mobile: "10vh",
-            padding: '10px',
-            style: "border-bottom: .5px solid #ccc; padding: 1vh; background: white",
-        });
+        ct.header();
 
         // CONTAINER PRINCIPAL
         gt.div('body_local', {

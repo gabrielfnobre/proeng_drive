@@ -15,130 +15,117 @@
 <body id="body_local">
     <script type="module">
         import * as gt from './universal/tag_blocks/global_tags.js';
+        import * as ct from './modules/commons_tags/commons.js';
         import * as js from './modules/dashboard/js/dashboard.js';
         import * as conn from './commons/js/conn_db.js';
         import {loadMyHTMLInSelector} from './commons/js/loadMyHTMLInSelector.js';
 
         // CABEÇALHO
-        gt.header('dinamics', {
-            bg_dark: "#181818",
-            header_fixed: true,
-            header_content: [
-                // LOGO
-                gt.image_center({
-                    image_size_desktop: '11vh',
-                    image_size_mobile: '9vh',
-                    on_click: () => window.location.href = "./modules/login/pages/login.html",
-                    style: "margin-left: 10px",
-                    width_desktop: '20%',
-                    width_mobile: '30%',
-                }),
-                
-                // ESPAÇADOR
-                gt.spacer(),
-
-                // USUÁRIO
-                gt.user_top_page({ user_photo: false, user_name: 'João da Silva', user_profession: 'Desenvolvedor', user_pending_count: 3, user_status_text: 'Online', user_status_color: '#2ecc40', on_click: () => alert('Clicou no topo do usuário!'), width_mobile: '50%'}),
-            ],
-            height_desktop: "12vh",
-            height_mobile: "10vh",
-            padding: '10px',
-            style: "border-bottom: .5px solid #ccc; padding: 1vh; background: white",
-        });
+        ct.header();
 
         // CONTAINER PRINCIPAL
         gt.div('body_local', {
             id: 'cnt_principal',
+            flex_desktop: 'row',
+            flex_mobile: 'column',
+            height_desktop: 'auto',
+            height_mobile: '100vh',
+            style: "padding: 20px;",
+            width_desktop: '60%',
+            width_mobile: '100%',
             content: [
                 
                 //CARD OVERVIEW
                 gt.div('body_local', {
                     id: 'overview',
+                    style: "border-radius: 1vh; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-bottom: 20px; padding: 10px;",
+                    width_desktop: '50%',
+                    width_mobile: '100%',
                     content: [
 
                         // CARROS DISPONÍVEIS
                         gt.div('overview', {
-                            content: [
-                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/green_car.png'}),
-                                gt.text({color: "#00ff00", text_content: "4<br>Disponível", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
-                            ],
-                            height_desktop: '12vw',
+                            height_desktop: '10vw',
                             height_mobile: '40vw',
                             id: 'car',
                             on_click: () => window.location.href = "./modules/dashboard/pages/cars_avaliable.html",
                             style: "display: flex; flex-direction: column; padding: 10px; justify-content: center;",
-                            width_desktop: '12vw',
+                            width_desktop: '10vw',
                             width_mobile: '40vw',
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '6vw', image_size_mobile: '20vw', image_path: './universal/images/green_car.png'}),
+                                gt.text({color: "#00ff00", text_content: "4<br>Disponível", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
                         }),
 
                         // CARROS USANDO
                         gt.div('overview', {
-                            content: [
-                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/blue_car.png'}),
-                                gt.text({color: "#00ccff", text_content: "4<br>Usando", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
-                            ],
-                            height_desktop: '12vw',
+                            height_desktop: '10vw',
                             height_mobile: '40vw',
                             id: 'car',
                             on_click: () => window.location.href = "./modules/dashboard/pages/cars_using.html",
                             style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
-                            width_desktop: '12vw',
+                            width_desktop: '10vw',
                             width_mobile: '40vw',
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '6vw', image_size_mobile: '20vw', image_path: './universal/images/blue_car.png'}),
+                                gt.text({color: "#00ccff", text_content: "4<br>Usando", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
                         }),
 
                         // CARROS MANUTENÇÃO
                         gt.div('overview', {
-                            content: [
-                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/red_car.png'}),
-                                gt.text({color: "#ff0000", text_content: "4<br>Manutenção", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
-                            ],
-                            height_desktop: '12vw',
+                            height_desktop: '10vw',
                             height_mobile: '40vw',
                             id: 'car',
                             on_click: () => window.location.href = "./modules/dashboard/pages/cars_maintenance.html",
                             style: "display: flex; flex-direction: column; padding: 10px; justify-content: center;",
-                            width_desktop: '12vw',
+                            width_desktop: '10vw',
                             width_mobile: '40vw',
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '6vw', image_size_mobile: '20vw', image_path: './universal/images/red_car.png'}),
+                                gt.text({color: "#ff0000", text_content: "4<br>Manutenção", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
                         }),
 
                         // CARROS BLOQUEADOS
                         gt.div('overview', {
-                            content: [
-                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/black_car.png', is_dark: true}),
-                                gt.text({text_content: "1<br>Bloqueado", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
-                            ],
-                            height_desktop: '12vw',
+                            height_desktop: '10vw',
                             height_mobile: '40vw',
                             id: 'car',
                             on_click: () => window.location.href = "./modules/dashboard/pages/cars_avaliable.html",
                             style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
-                            width_desktop: '12vw',
+                            width_desktop: '10vw',
                             width_mobile: '40vw',
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '6vw', image_size_mobile: '20vw', image_path: './universal/images/black_car.png', is_dark: true}),
+                                gt.text({text_content: "1<br>Bloqueado", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
                         }),
 
                         // CARROS RESERVADOS
-                        // gt.div('overview', {
-                        //     content: [
-                        //         gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '20vw', image_path: './universal/images/orange_car.png'}),
-                        //         gt.text({color: "#ff7f2a", text_content: "1<br>Reservado", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
-                        //     ],
-                        //     height_desktop: '12vw',
-                        //     height_mobile: '40vw',
-                        //     id: 'car',
-                        //     style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
-                        //     width_desktop: '12vw',
-                        //     width_mobile: '40vw',
-                        // }),
+                        gt.div('overview', {
+                            height_desktop: '10vw',
+                            height_mobile: '40vw',
+                            id: 'car',
+                            style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
+                            width_desktop: '10vw',
+                            width_mobile: '40vw',
+                            content: [
+                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '6vw', image_size_mobile: '20vw', image_path: './universal/images/orange_car.png'}),
+                                gt.text({color: "#ff7f2a", text_content: "1<br>Reservado", style: "font-size: 2.4vh; font-weight: bold; line-height: 1; margin-top: -1vw; text-shadow: 1px 1px 1px rgba(0,0,0,.5)"}),
+                            ],
+                        }),
         
                     ],
-                    style: "justify-content: center; border-radius: 1vh; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 20px; padding: 10px;",
-                    width_desktop: '60%',
-                    width_mobile: '100%',
                 }),
                 
                 //CARDS UTILITARIOS
                 gt.div('body_local', {
                     id: 'utilities',
+                    style: "justify-content: center; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding: 10px;",
+                    width_desktop: '50%',
+                    width_mobile: '100%',
                     content: [
                         // DESTINOS HOJE
                         gt.div('overview', {
@@ -201,17 +188,9 @@
                             width_mobile: '40vw',
                         }),
                     ],
-                    style: "justify-content: center; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding: 10px;",
-                    width_desktop: '60%',
-                    width_mobile: '100%',
                 }),
 
             ],
-            height_desktop: '100vh',
-            height_mobile: '100vh',
-            style: "align-items: center;display: flex; flex-direction: column; padding: 20px;",
-            width_desktop: '100%',
-            width_mobile: '100%',
         })
 
 

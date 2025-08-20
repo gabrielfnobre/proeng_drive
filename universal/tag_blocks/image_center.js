@@ -17,11 +17,12 @@
  *      - color_dark: string - cor do texto para modo dark (opcional)
  *      - on_click: function|string|null - função JS a ser executada no clique OU string de código JS OU url (default: null)
  *      - style: string (opcional) - string de CSS inline para customizar o elemento principal (sobrescreve qualquer outro)
+ *      - size_percent: number (opcional) - percentual do tamanho da imagem em relação ao container (ex: 80 para 80%, default: 100)
  *      - qualquer outro parâmetro CSS pode ser passado com o mesmo nome do atributo em CSS (ex: background, border, box-shadow, etc)
  * 
  * @returns {jQuery} - elemento jQuery pronto para ser inserido em outro container
  * @copia_rapida_de_parametros
-    {image_path: 'universal/images/logo_one_flow_comum.png', is_circle: '', is_dark: false, image_size_desktop: '15vw', image_size_mobile: '50vw', width_desktop: '15vw', width_mobile: '50vw', height_desktop: '15vw', height_mobile: '50vw', on_click: 'https//jw.org ou () => function()', style: 'border: 2px solid red;'}
+    {image_path: 'universal/images/logo_one_flow_comum.png', is_circle: '', is_dark: false, image_size_desktop: '15vw', image_size_mobile: '50vw', width_desktop: '15vw', width_mobile: '50vw', height_desktop: '15vw', height_mobile: '50vw', on_click: 'https//jw.org ou () => function()', style: 'border: 2px solid red;', size_percent: 80}
  */
 export default function image_center(options = {}) {
     // Parâmetros principais
@@ -40,11 +41,13 @@ export default function image_center(options = {}) {
     const color_dark = options.color_dark;
     const on_click = options.on_click !== undefined ? options.on_click : null;
     const styleString = options.style !== undefined ? options.style : '';
+    const size_percent = options.size_percent !== undefined && options.size_percent !== null ? options.size_percent : 100;
 
     // Gera um identificador único para esta instância
     const uniqueId = 'image-center-' + Date.now() + '-' + Math.floor(Math.random() * 1000000);
     const containerClass = `image-center-container-${uniqueId}`;
     const imageClass = `image-center-bg-${uniqueId}`;
+    const imageInnerClass = `image-center-inner-${uniqueId}`;
 
     // Extrai atributos CSS extras (além dos já tratados)
     const cssAttrs = {};
@@ -64,7 +67,8 @@ export default function image_center(options = {}) {
             key !== 'color_light' &&
             key !== 'color_dark' &&
             key !== 'on_click' &&
-            key !== 'style'
+            key !== 'style' &&
+            key !== 'size_percent'
         ) {
             cssAttrs[key] = options[key];
         }
@@ -129,6 +133,13 @@ export default function image_center(options = {}) {
         .${imageClass} {
             width: ${image_size_desktop};
             height: ${image_size_desktop};
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .${imageInnerClass} {
+            width: ${size_percent}%;
+            height: ${size_percent}%;
         }
     `;
     // Mobile
@@ -137,6 +148,10 @@ export default function image_center(options = {}) {
             .${imageClass} {
                 width: ${image_size_mobile} !important;
                 height: ${image_size_mobile} !important;
+            }
+            .${imageInnerClass} {
+                width: ${size_percent}%;
+                height: ${size_percent}%;
             }
         }
     `;
@@ -177,7 +192,7 @@ export default function image_center(options = {}) {
     if (is_dark) {
         customDarkImageCSS += `
             @media (prefers-color-scheme: dark) {
-                .${imageClass} {
+                .${imageInnerClass} {
                     filter: invert(1) !important;
                 }
             }
@@ -195,10 +210,13 @@ export default function image_center(options = {}) {
             background: ${bg_light && !bg_dark ? bg_light : (bg_dark && !bg_light ? bg_dark : resolvedBg)};
         }
         .${imageClass} {
+            background: none !important;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 0;
             transition: border-radius 0.2s, transform 0.18s cubic-bezier(.4,1.3,.5,1.01);
             cursor: pointer;
@@ -206,6 +224,14 @@ export default function image_center(options = {}) {
         }
         .${imageClass}.image-center-hoverable:hover {
             transform: scale(1.025);
+        }
+        .${imageInnerClass} {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: block;
+            margin: 0;
+            transition: border-radius 0.2s;
         }
         ${customResponsiveCSS}
         ${customModeCSS}
@@ -217,21 +243,22 @@ export default function image_center(options = {}) {
     // Cria o elemento jQuery
     const $container = $(`<div class="${containerClass}"></div>`);
     const $imageDiv = $(`<div class="${imageClass}"></div>`);
+    const $imageInnerDiv = $(`<div class="${imageInnerClass}"></div>`);
 
-    // Aplica estilos padrão
-    $imageDiv.css({
+    // Aplica estilos padrão na inner (imagem)
+    $imageInnerDiv.css({
         'background-image': `url('${image_path}')`,
         'border-radius': is_circle ? '50%' : '0'
     });
 
-    // Aplica atributos CSS extras (ex: background, border, box-shadow, etc)
+    // Aplica atributos CSS extras (ex: background, border, box-shadow, etc) na inner
     if (Object.keys(cssAttrs).length > 0) {
-        $imageDiv.css(cssAttrs);
+        $imageInnerDiv.css(cssAttrs);
     }
 
-    // Aplica estilo inline se fornecido (sobrescreve outros)
+    // Aplica estilo inline se fornecido (sobrescreve outros) na inner
     if (styleString && typeof styleString === 'string') {
-        $imageDiv.attr('style', ($imageDiv.attr('style') || '') + ';' + styleString);
+        $imageInnerDiv.attr('style', ($imageInnerDiv.attr('style') || '') + ';' + styleString);
     }
 
     // Se não for para ser clicável, remove o cursor pointer
@@ -264,6 +291,7 @@ export default function image_center(options = {}) {
         }
     }
 
+    $imageDiv.append($imageInnerDiv);
     $container.append($imageDiv);
 
     return $container;
@@ -289,7 +317,8 @@ const $img = imageCenter({
     bg_light: '#fff',
     bg_dark: '#222',
     color_light: '#222',
-    color_dark: '#fff'
+    color_dark: '#fff',
+    size_percent: 80
 });
 // ou
 const $img2 = imageCenter({
@@ -299,13 +328,15 @@ const $img2 = imageCenter({
     on_click: "console.log('Imagem clicada via string!')",
     style: 'border-radius: 10px;',
     width_desktop: '120px',
-    width_mobile: '80vw'
+    width_mobile: '80vw',
+    size_percent: 60
 });
 // ou
 const $img3 = imageCenter({
     image_path: '/caminho/da/imagem3.jpg',
     is_dark: true,
-    on_click: "https://www.google.com"
+    on_click: "https://www.google.com",
+    size_percent: 100
 });
 
 $('#algum-container').append($img);

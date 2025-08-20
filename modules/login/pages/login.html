@@ -21,14 +21,19 @@
             box_content: [
                 // logo one flow
                 gt.image_center({style: "margin-bottom: -3vw", image_size_desktop: '12vw', on_click: () => js.iAmOneFlow(gt)}),
+                
                 // email_placeholder
                 gt.input_email({email_label: 'E-mail', email_name: 'email', email_placeholder: 'Digite seu e-mail', email_value: '', required: true, input_id: '', on_valid: null, on_invalid: null, style: "padding: 0, z-index: 1", width_desktop: "100%"}),
+                
                 // senha
                 gt.input_password({password_label: 'Senha', password_name: 'password', password_placeholder: 'Sua senha', password_value: '', required: true, input_id: '', password_exists_func: null, style: "padding: 0", width_desktop: "100%"}),
+                
                 // linha separadora
                 gt.line_separator({width_desktop: "100%", margin: '15px auto', height: '1px', class_name: ''}),
+                
                 // entrar
                 gt.button({text: 'ENTRAR', on_click: () => js.signIn(gt), width_desktop: "100%"}),
+                
                 // esqueci minha senha
                 gt.anchor({text: "Esqueci minha senha", color: "#0f94e1", on_click: () => js.remindMyPassword(gt), style: "justify-content: center", width_desktop: "100%"}),
             ]
