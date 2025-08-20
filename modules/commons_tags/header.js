@@ -3,16 +3,19 @@ import * as gt from '../../universal/tag_blocks/global_tags.js';
 export default function header(){
     return gt.header('dinamics', {
         bg_dark: "#181818",
-        header_fixed: true,
         height_desktop: "14vh",
+        header_fixed: true,
         height_mobile: "10vh",
         padding: '10px',
-        style: "border-bottom: .5px solid #ccc; padding: 1vh; background: white",
+        style: `
+        background: white;
+        border-bottom: .5px solid #ccc;
+        padding: 1vh;
+        `,
         header_content: [
             
             // LOGO
             gt.image_center({
-                height_desktop: '100%',
                 height_desktop: '100%',
                 image_size_desktop: '20vh',
                 image_size_mobile: '9vh',
@@ -23,7 +26,6 @@ export default function header(){
                 width_mobile: '30%',
             }),
             
-            // ESPAÇADOR
             gt.spacer(),
     
             // USUÁRIO

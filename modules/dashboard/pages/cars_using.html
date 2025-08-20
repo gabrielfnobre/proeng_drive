@@ -26,6 +26,16 @@
         // CONTAINER PRINCIPAL
         gt.div('body_local', {
             id: 'cnt_principal',
+            height_desktop: '100vh',
+            height_mobile: '100vh',
+            style: `
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            `,
+            width_desktop: '100%',
+            width_mobile: '100%',
             content: [
                 
                 // TITULO
@@ -34,332 +44,23 @@
                 //CARD OVERVIEW
                 gt.div('body_local', {
                     id: 'overview',
+                    style: `
+                    gap: 20px;
+                    padding-bottom: 50px;
+                    `,
                     content: [
 
                         // CARD DE CARRO
-                        gt.div('overview', {
-                            bg_dark: "#2a2a2a",
-                            content: [
-
-                                //CONTAINER HORIZONTAL - CARRO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DO CARRO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', is_circle: true, image_size_desktop: '10vw', image_size_mobile: '25vw', image_path: './universal/images/nissan_kicks.jpg', style: "background-color: white; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '25vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DO CARRO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Nissan Kicks", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Placa:</b> XLS-4578", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Ano:</b> 2024", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-
-                                //CONTAINER HORIZONTAL - USUARIO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DO USUARIO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '15vw', image_path: './universal/images/avatar_3.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DO USUARIO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Motorista", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Nome:</b> Nome tal", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Setor:</b> Inovação", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Nome:</b> Nome tal", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-
-                                //CONTAINER HORIZONTAL - LOCALIZAÇÃO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DA LOCALIZAÇÃO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '8vw', image_size_mobile: '15vw', image_path: './universal/images/location.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DA LOCALIZAÇÃO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Localização:", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-                            ],
-                            id: 'cars_details',
-                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-direction: column; padding: 10px;",
-                            width_desktop: '100%',
-                            width_mobile: '100%',
-                        }),
-
+                        ct.card_car_user_location('Celta - Chevrolet', 'CLT-4578', '2024', 'em uso', 'P3', undefined, 'Ana da Silva', 'Inovação', undefined, 'P3', './universal/images/celta.jpg', './universal/images/avatar_1.png'),
+                        
                         // CARD DE CARRO
-                        gt.div('overview', {
-                            bg_dark: "#2a2a2a",
-                            content: [
-
-                                //CONTAINER HORIZONTAL - CARRO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DO CARRO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', is_circle: true, image_size_desktop: '10vw', image_size_mobile: '25vw', image_path: './universal/images/onix.png', style: "background-color: white; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '25vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DO CARRO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Nissan Kicks", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Placa:</b> XLS-4578", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Ano:</b> 2024", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-
-                                //CONTAINER HORIZONTAL - USUARIO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DO USUARIO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '15vw', image_path: './universal/images/avatar_1.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DO USUARIO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Motorista", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Nome:</b> Nome tal", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Setor:</b> Inovação", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Nome:</b> Nome tal", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-
-                                //CONTAINER HORIZONTAL - LOCALIZAÇÃO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DA LOCALIZAÇÃO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '8vw', image_size_mobile: '15vw', image_path: './universal/images/location.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DA LOCALIZAÇÃO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Localização:", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-                            ],
-                            id: 'cars_details',
-                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-direction: column; padding: 10px;",
-                            width_desktop: '100%',
-                            width_mobile: '100%',
-                        }),
-
+                        ct.card_car_user_location('Onix - Chevrolet', 'ONX-4578', '2024', 'em uso', 'P3', undefined, 'Paulo da Silva', 'Inovação', undefined, 'P3', './universal/images/onix.png', './universal/images/avatar_2.png'),
+                        
                         // CARD DE CARRO
-                        gt.div('overview', {
-                            bg_dark: "#2a2a2a",
-                            content: [
-
-                                //CONTAINER HORIZONTAL - CARRO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DO CARRO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', is_circle: true, image_size_desktop: '10vw', image_size_mobile: '25vw', image_path: './universal/images/celta.jpg', style: "background-color: white; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '25vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DO CARRO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Celta", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Placa:</b> CLT-4578", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Ano:</b> 2024", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-
-                                //CONTAINER HORIZONTAL - USUARIO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DO USUARIO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '10vw', image_size_mobile: '15vw', image_path: './universal/images/avatar_2.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DO USUARIO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Motorista", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Nome:</b> Nome tal", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Setor:</b> Inovação", style: "text-align: left; margin: 0"}),
-                                                gt.text({text_content: "<b>Cargo:</b> Desenvolvedor", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-
-                                //CONTAINER HORIZONTAL - LOCALIZAÇÃO
-                                gt.div('car_details', {
-                                    content: [
-
-                                        //CONTAINER VERTICAL - IMAGEM DA LOCALIZAÇÃO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.image_center({bg_dark: 'transparent', image_size_desktop: '8vw', image_size_mobile: '15vw', image_path: './universal/images/location.png', style: "background-color: lightgray; box-shadow: 4px 4px 10px rgba(0,0,0,.5);", height_mobile: '20vw', width_mobile: '20vw'}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px;",
-                                            width_desktop: '30%',
-                                            width_mobile: '30%',
-                                        }),
-
-                                        //CONTAINER VERTICAL - DESCRIÇÕES DA LOCALIZAÇÃO
-                                        gt.div('car_details', {
-                                            content: [
-                                                gt.text({text_content: "Localização:", style: "font-size: 2.4vh; font-weight: bold; text-align: left; margin: 0"}),
-                                                gt.text({text_content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.", style: "text-align: left; margin: 0"}),
-                                            ],
-                                            style: "display: flex; flex-direction: column; padding: 10px; justify-content: center; margin-left: 10px",
-                                            width_desktop: '70%',
-                                            width_mobile: '70%',
-                                        }),
-                                    ],
-                                    style: "display: flex;",
-                                    width_desktop: '100%',
-                                    width_mobile: '100%',
-                                }),
-                            ],
-                            id: 'cars_details',
-                            style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,.5); display: flex; flex-direction: column; padding: 10px;",
-                            width_desktop: '100%',
-                            width_mobile: '100%',
-                        }),
+                        ct.card_car_user_location('Nissan - Kicks', 'NKC-4258', '2025', 'em uso', 'P3', undefined, 'João da Silva', 'Inovação', undefined, 'P3', './universal/images/nissan_kicks.jpg', './universal/images/avatar_3.png'),
                     ],
-                    style: "justify-content: center; display: flex; flex-direction: column; gap: 15px; padding: 10px;",
-                    width_desktop: '60%',
-                    width_mobile: '100%',
                 }),
-                
-
             ],
-            height_desktop: '100vh',
-            height_mobile: '100vh',
-            style: "align-items: center;display: flex; flex-direction: column; padding: 20px;",
-            width_desktop: '100%',
-            width_mobile: '100%',
         })
 
 

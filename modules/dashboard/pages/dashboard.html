@@ -93,7 +93,7 @@
                             height_desktop: '10vw',
                             height_mobile: '40vw',
                             id: 'car',
-                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_avaliable.html",
+                            on_click: () => window.location.href = "./modules/dashboard/pages/cars_denied.html",
                             style: "; display: flex; flex-direction: column; padding: 10px; justify-content: center;",
                             width_desktop: '10vw',
                             width_mobile: '40vw',
@@ -123,7 +123,7 @@
                 //CARDS UTILITARIOS
                 gt.div('body_local', {
                     id: 'utilities',
-                    style: "justify-content: center; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding: 10px;",
+                    style: "align-items: center; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; padding: 10px;",
                     width_desktop: '50%',
                     width_mobile: '100%',
                     content: [
@@ -131,15 +131,15 @@
                         gt.div('overview', {
                             bg_light: 'linear-gradient(120deg, #6b110b, #ff0057)',
                             bg_dark: 'linear-gradient(120deg, #6b110b, #ff0057)',
-                            content: [
-                                gt.text({color: "white", text_content: "DESTINOS HOJE", style: "font-size: 2.3vh; font-weight: bold;"}),
-                            ],
                             height_desktop: '12vw',
                             height_mobile: '40vw',
                             id: 'i_want_to_use',
                             style: "border-radius: 10px; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 10px; justify-content: center;",
                             width_desktop: '12vw',
                             width_mobile: '40vw',
+                            content: [
+                                gt.text({color: "white", text_content: "DESTINOS HOJE", style: "font-size: 2.3vh; font-weight: bold;"}),
+                            ],
                         }),
 
                         // VEICULOS
