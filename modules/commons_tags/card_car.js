@@ -5,6 +5,7 @@ export default function card_car(car_name, plate, year, status, location, image_
     return gt.div('overview', {
         bg_dark: "#2a2a2a",
         id: 'cars_details',
+        on_click: () => window.location.href = './modules/dashboard/pages/to_use_car.html',
         style: `
         border-radius: 10px;
         box-shadow: 4px 4px 10px rgba(39, 28, 28, 0.5);
