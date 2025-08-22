@@ -15,6 +15,7 @@
  *      - width_mobile: string - largura do botão no mobile (ex: '90%', '100vw', etc)
  *      - height_desktop: string - altura do botão no desktop (ex: '40px', 'auto', etc)
  *      - height_mobile: string - altura do botão no mobile (ex: '60px', 'auto', etc)
+ *      - submit: boolean - se true, o botão será do tipo submit e fará validação do form antes de executar ação (default: false)
  *      - Qualquer outro parâmetro CSS pode ser passado usando o nome CSS (ex: 'border-radius', 'font-size', etc)
  * 
  * @returns {jQuery} - elemento jQuery pronto para ser inserido em outro container
@@ -24,6 +25,7 @@ export default function button(options = {}) {
     const text = options.text !== undefined ? options.text : 'Botão';
     const on_click = options.on_click !== undefined ? options.on_click : null;
     const styleString = options.style !== undefined ? options.style : '';
+    const submit = options.submit === true; // default: false
 
     // Novos parâmetros para responsividade
     const width_desktop = options.width_desktop;
@@ -47,7 +49,7 @@ export default function button(options = {}) {
     // Lista de propriedades CSS válidas para aplicar via .css()
     // (pega todas as chaves que são nomes CSS válidos, exceto os parâmetros reservados)
     const reserved = [
-        'text', 'on_click', 'style',
+        'text', 'on_click', 'style', 'submit',
         'width_desktop', 'width_mobile', 'height_desktop', 'height_mobile',
         'bg_light', 'bg_dark', 'color_light', 'color_dark'
     ];
@@ -239,7 +241,8 @@ export default function button(options = {}) {
 
     // Cria o elemento jQuery com classes únicas
     const $container = $(`<div class="generic-button-container ${containerClass}"></div>`);
-    const $button = $(`<button type="button" class="generic-button ${buttonClass}"></button>`).text(text);
+    // Se submit: true, tipo é submit, senão é button
+    const $button = $(`<button type="${submit ? 'submit' : 'button'}" class="generic-button ${buttonClass}"></button>`).text(text);
 
     // Aplica propriedades CSS passadas via options (usando nomes CSS)
     for (const prop in cssProps) {
@@ -252,20 +255,54 @@ export default function button(options = {}) {
     }
 
     // Define comportamento do botão
-    if (typeof on_click === 'function') {
-        $button.on('click', on_click);
-    } else if (typeof on_click === 'string' && on_click.trim() !== '') {
-        // Se for string, verifica se é uma URL (começa com http:// ou https://)
-        if (/^https?:\/\//i.test(on_click.trim())) {
-            $button.on('click', function(e) {
-                window.open(on_click.trim(), '_blank', 'noopener,noreferrer');
-            });
-        } else {
-            // Se não for URL, assume que é código JS a ser executado
-            $button.on('click', function(e) {
-                // eslint-disable-next-line no-eval
-                eval(on_click);
-            });
+    if (submit) {
+        // Botão de submit: valida o form antes de executar ação customizada
+        $button.on('click', function(e) {
+            // Procura o form mais próximo
+            const $form = $button.closest('form');
+            if ($form.length) {
+                // Usa a API nativa para validação
+                if (!$form[0].checkValidity()) {
+                    // Se inválido, deixa o browser mostrar os erros
+                    // (o browser já previne o submit automaticamente)
+                    // Força o browser a mostrar os erros
+                    $form[0].reportValidity && $form[0].reportValidity();
+                    // Não executa ação customizada
+                    return;
+                }
+            }
+            // Se chegou aqui, o form é válido ou não está em um form
+            if (typeof on_click === 'function') {
+                // Executa função customizada
+                on_click.call(this, e);
+            } else if (typeof on_click === 'string' && on_click.trim() !== '') {
+                if (/^https?:\/\//i.test(on_click.trim())) {
+                    window.open(on_click.trim(), '_blank', 'noopener,noreferrer');
+                } else {
+                    // eslint-disable-next-line no-eval
+                    eval(on_click);
+                }
+            }
+            // Se for submit dentro de form, deixa o submit acontecer normalmente
+            // (não chama e.preventDefault())
+        });
+    } else {
+        // Botão normal (não submit)
+        if (typeof on_click === 'function') {
+            $button.on('click', on_click);
+        } else if (typeof on_click === 'string' && on_click.trim() !== '') {
+            // Se for string, verifica se é uma URL (começa com http:// ou https://)
+            if (/^https?:\/\//i.test(on_click.trim())) {
+                $button.on('click', function(e) {
+                    window.open(on_click.trim(), '_blank', 'noopener,noreferrer');
+                });
+            } else {
+                // Se não for URL, assume que é código JS a ser executado
+                $button.on('click', function(e) {
+                    // eslint-disable-next-line no-eval
+                    eval(on_click);
+                });
+            }
         }
     }
 
@@ -303,6 +340,13 @@ const $btn2 = button({
     on_click: "console.log('Clicou via string!')",
     style: 'padding: 20px 40px;',
     width_desktop: '300px'
+});
+
+// Exemplo submit:
+const $btnSubmit = button({
+    text: 'Enviar',
+    submit: true,
+    on_click: function() { alert('Formulário válido!'); }
 });
 
 $('#algum-container').append($btn);

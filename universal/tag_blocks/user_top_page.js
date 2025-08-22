@@ -262,11 +262,9 @@ export default function user_top_page(options = {}) {
     }
     @media (max-width: 400px) {
         .${uniqueId}-container {
-            width: 98vw;
+            width: 50vw;
             padding: 10px 2vw;
             gap: 8px;
-            flex-direction: column;
-            align-items: flex-start;
         }
         .${uniqueId}-info-block {
             margin-top: 8px;
