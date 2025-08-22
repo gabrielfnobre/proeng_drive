@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
     <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
     <script src="commons/js/jquery-3.7.1.js"></script>
-    <title>Proeng Driver - Disponíveis</title>
+    <title>Proeng Driver - Carros</title>
 </head>
 
 <body id="body_local">
@@ -40,8 +40,7 @@
                 
                 // TITULO
                 gt.text({
-                    color: "#00ff00",
-                    text_content: "DISPONÍVEIS",
+                    text_content: "VEÍCULOS", 
                     style: `
                         font-size: 4vh;
                         font-weight: bold;
@@ -49,16 +48,13 @@
                     `,
                 }),
 
-                //CONTAINER CENTRAL
+                //CARD OVERVIEW
                 gt.div('body_local', {
-                    align_desktop: 'center',
                     id: 'overview',
                     style: `
-                        gap: 15px;
-                        padding: 10px;
+                        gap: 20px;
+                        padding-bottom: 50px;
                     `,
-                    width_desktop: '60%',
-                    width_mobile: '100%',
                     content: [
 
                         // CARD DE CARRO

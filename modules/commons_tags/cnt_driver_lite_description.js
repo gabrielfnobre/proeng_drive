@@ -3,7 +3,7 @@ import * as gt from '../../universal/tag_blocks/global_tags.js';
 export default function cnt_driver_lite_description(id, image_path = './universal/images/avatar_generics.png', name_title='Motorista', name, department){
     return gt.div(id, {
         style: "display: flex",
-        width_desktop: '50%',
+        width_desktop: '100%',
         width_mobile: '100%',
         content: [
             //CONTAINER VERTICAL - IMAGEM DO USUARIO

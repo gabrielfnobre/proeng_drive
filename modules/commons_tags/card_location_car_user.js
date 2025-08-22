@@ -16,14 +16,23 @@ export default function card_car_user_location(car_name, plate, year, status, lo
         width_mobile: '100%',
         content: [
 
-            // CNT CARRO
-            ct.cnt_car_description('car_details', image_car, car_name, plate, year, status, location),
+            //CONTAINER HORIZONTAL - LOCALIZAÇÃO
+            ct.cnt_location_description('car_details', destiny, image_destiny, destiny_title),
             
             gt.line_separator(),
 
             gt.div('cars_details', {
+                id: 'into_details',
                 flex_desktop: 'row',
                 content: [
+                    // CNT CARRO
+                    gt.div('into_details',{
+                        width_desktop: '50%',
+                        width_mobile: '100%',
+                        content: [
+                            ct.cnt_car_description('car_details', image_car, car_name, plate, year, status, location),
+                        ]
+                    }),
 
                     // CNT MOTORISTA
                     gt.div('into_details',{
@@ -31,15 +40,6 @@ export default function card_car_user_location(car_name, plate, year, status, lo
                         width_mobile: '100%',
                         content: [
                             ct.cnt_driver_lite_description('car_details', image_driver, driver_title, driver_name, department),
-                        ]
-                    }),
-
-                    //CONTAINER LOCALIZAÇÃO
-                    gt.div('into_details',{
-                        width_desktop: '50%',
-                        width_mobile: '100%',
-                        content: [
-                            ct.cnt_location_description('car_details', destiny, image_destiny, destiny_title)
                         ]
                     }),
                 ]

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
     <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
     <script src="commons/js/jquery-3.7.1.js"></script>
-    <title>Proeng Driver - Disponíveis</title>
+    <title>Proeng Driver - Reservados</title>
 </head>
 
 <body id="body_local">
@@ -36,12 +36,11 @@
             `,
             width_desktop: '100%',
             width_mobile: '100%',
-            content: [
-                
+            content: [                
                 // TITULO
                 gt.text({
-                    color: "#00ff00",
-                    text_content: "DISPONÍVEIS",
+                    color: "#ff7f2a",
+                    text_content: "RESERVADOS",
                     style: `
                         font-size: 4vh;
                         font-weight: bold;
@@ -49,7 +48,7 @@
                     `,
                 }),
 
-                //CONTAINER CENTRAL
+                //CARD OVERVIEW
                 gt.div('body_local', {
                     align_desktop: 'center',
                     id: 'overview',
@@ -60,22 +59,12 @@
                     width_desktop: '60%',
                     width_mobile: '100%',
                     content: [
-
                         // CARD DE CARRO
-                        ct.card_car('Celta - Chevrolet', 'CLT-4578', '2024', 'em uso', 'P3', './universal/images/celta.jpg',),
-
-                        // CARD DE CARRO 
-                        ct.card_car('Onix - Chevrolet', 'ONX-4578', '2024', 'em uso', 'P3', './universal/images/onix.png'),
-                        
-                        // CARD DE CARRO
-                        ct.card_car('Nissan - Kicks', 'NKC-4258', '2025', 'em uso', 'P3', './universal/images/nissan_kicks.jpg'),
+                        ct.card_car_user_location('Celta - Chevrolet', 'CLT-4578', '2024', 'reservado', 'P3', 'Reservado por', 'Paulo da Silva', 'Inovação', 'Onde está:', 'P3', './universal/images/celta.jpg', './universal/images/avatar_2.png'),
                     ],
                 }),
             ],
-        })
-
-
-        
+        }) 
     </script>
 </body>
 <script type="module" src="modules/dashboard/js/dashboard.js"></script>

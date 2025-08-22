@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
     <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
     <script src="commons/js/jquery-3.7.1.js"></script>
-    <title>Proeng Driver - Status</title>
+    <title>Proeng Driver - Usando</title>
 </head>
 
 <body id="body_local">
@@ -29,24 +29,32 @@
             height_desktop: '100vh',
             height_mobile: '100vh',
             style: `
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
             `,
             width_desktop: '100%',
             width_mobile: '100%',
             content: [
                 
                 // TITULO
-                gt.text({color: "#00ccff", text_content: "EM USO", style: "font-size: 4vh; font-weight: bold; text-shadow: 2px 2px 3px rgba(0,0,0,.5)"}),
+                gt.text({
+                    color: "#00ccff", 
+                    text_content: "EM USO", 
+                    style: `
+                        font-size: 4vh;
+                        font-weight: bold;
+                        text-shadow: 2px 2px 3px rgba(0,0,0,.5);
+                    `,
+                }),
 
                 //CARD OVERVIEW
                 gt.div('body_local', {
                     id: 'overview',
                     style: `
-                    gap: 20px;
-                    padding-bottom: 50px;
+                        gap: 20px;
+                        padding-bottom: 50px;
                     `,
                     content: [
 

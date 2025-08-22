@@ -5,7 +5,7 @@ export default function cnt_location_description(id, description, image_path = '
         style: `
         display: flex;
         `,
-        width_desktop: '50%',
+        width_desktop: '100%',
         width_mobile: '100%',
         content: [
 
