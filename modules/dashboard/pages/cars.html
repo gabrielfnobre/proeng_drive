@@ -52,19 +52,57 @@
                 gt.div('body_local', {
                     id: 'overview',
                     style: `
+                        align-items: center;
                         gap: 20px;
+                        padding-top: 30px;
                         padding-bottom: 50px;
                     `,
                     content: [
 
+                        //ADICIONAR UM CARRO
+                        gt.div('overview', {
+                            id: 'add_car',
+                            style: `
+                                background: linear-gradient(145deg, #3bc8f5, darkgreen);
+                                border-radius: 15px;
+                                font-size: 2vh;
+                                font-weight: bold;
+                                justify-content: center;
+                                min-height: 10vh;
+                                padding: 20px;
+                            `,
+                            width_desktop: '50%',
+                            width_mobile: '100%',
+                            content: [
+                                gt.text({
+                                    color: 'white',
+                                    style: `
+                                    color: white;
+                                    font-size: 5vh;
+                                    font-weight: bold;
+                                    margin: 0;
+                                    `,
+                                    text_content: '+',
+                                }),
+                                gt.text({
+                                    color: 'white',
+                                    style: `
+                                        font-weight: bold;
+                                        margin: 0;
+                                    `,
+                                    text_content: 'ADICIONAR UM CARRO',
+                                }),
+                            ]
+                        }),
+
                         // CARD DE CARRO
-                        ct.card_car('Celta - Chevrolet', 'CLT-4578', '2024', 'em uso', 'P3', './universal/images/celta.jpg',),
+                        ct.card_car_edit_remove('Celta - Chevrolet', 'CLT-4578', '2024', 'em uso', 'P3', './universal/images/celta.jpg',),
 
                         // CARD DE CARRO 
-                        ct.card_car('Onix - Chevrolet', 'ONX-4578', '2024', 'em uso', 'P3', './universal/images/onix.png'),
+                        ct.card_car_edit_remove('Onix - Chevrolet', 'ONX-4578', '2024', 'em uso', 'P3', './universal/images/onix.png'),
                         
                         // CARD DE CARRO
-                        ct.card_car('Nissan - Kicks', 'NKC-4258', '2025', 'em uso', 'P3', './universal/images/nissan_kicks.jpg'),
+                        ct.card_car_edit_remove('Nissan - Kicks', 'NKC-4258', '2025', 'em uso', 'P3', './universal/images/nissan_kicks.jpg'),
                     ],
                 }),
             ],

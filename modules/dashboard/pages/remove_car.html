@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/proeng_drive/">
+    <link rel="stylesheet" href="universal/css/universal.css">
+    <link rel="stylesheet" href="modules/dashboard/css/dashboard.css">
+    <link rel="icon" href="./universal/images/logo_OF_comum.png" type="image/png">
+    <script src="commons/js/jquery-3.7.1.js"></script>
+    <title>Proeng Driver - Remoção</title>
+</head>
+
+<body id="body_local">
+    <script type="module">
+        import * as gt from './universal/tag_blocks/global_tags.js';
+        import * as ct from './modules/commons_tags/commons.js';
+        import * as js from './modules/dashboard/js/dashboard.js';
+        import * as conn from './commons/js/conn_db.js';
+        import {loadMyHTMLInSelector} from './commons/js/loadMyHTMLInSelector.js';
+
+        // CABEÇALHO
+        ct.header();
+
+        // CONTAINER PRINCIPAL
+        gt.div('body_local', {
+            id: 'cnt_principal',
+            height_desktop: '100vh',
+            height_mobile: '100vh',
+            style: `
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+            `,
+            width_desktop: '100%',
+            width_mobile: '100%',
+            content: [
+                
+                // TITULO
+                gt.text({
+                    text_content: "TEM CERTEZA QUE DESEJA REMOVER ESTE CARRO?",
+                    style: `
+                        font-size: 4vh;
+                        font-weight: bold;
+                        text-shadow: 2px 2px 3px rgba(0,0,0,.5);
+                    `,
+                }),
+
+                //CONTAINER CENTRAL
+                gt.div('body_local', {
+                    align_desktop: 'center',
+                    id: 'overview',
+                    style: `
+                        gap: 15px;
+                        padding: 10px;
+                    `,
+                    width_desktop: '60%',
+                    width_mobile: '100%',
+                    content: [
+
+                        // CARD DE CARRO
+                        ct.card_car('Celta - Chevrolet', 'CLT-4578', '2024', 'em uso', 'P3', './universal/images/celta.jpg',),
+
+                        gt.text({text_content: "<b style: 'color: red;'>Atenção!</b><br>Ao remover esse carro você o torna indisponível para toda a empresa, ele será apagado como opção, não será possível visualizar seu histórico no aplicativo.<br><br>(Obs: os dados dele continuarão no banco de dados)"}),
+
+                        // FORMULARIO DE DEVOLUCAO
+                        ct.form_remove_car()
+                    ],
+                }),
+            ],
+        })
+
+
+        
+    </script>
+</body>
+<script type="module" src="modules/dashboard/js/dashboard.js"></script>
+</html>
